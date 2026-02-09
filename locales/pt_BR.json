@@ -1,0 +1,31 @@
+{
+  "app": {
+    "messages": {
+      "title": "Mensagens",
+      "typing": "digitando...",
+      "no_messages": "Nenhuma mensagem"
+    },
+    "gallery": {
+      "title": "Galeria",
+      "no_images": "Nenhuma imagem"
+    },
+    "settings": {
+      "title": "Configurações",
+      "language": "Idioma",
+      "text_speed": "Velocidade do Texto",
+      "volume": "Volume"
+    }
+  },
+  "ui": {
+    "unlock": "Desbloquear",
+    "back": "Voltar",
+    "save": "Salvar",
+    "load": "Carregar",
+    "settings": "Configurações",
+    "exit": "Sair"
+  },
+  "notifications": {
+    "new_message": "Nova mensagem de {sender}",
+    "app_unlocked": "Novo aplicativo desbloqueado: {app_name}"
+  }
+}

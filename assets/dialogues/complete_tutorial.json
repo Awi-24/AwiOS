@@ -1,0 +1,406 @@
+{
+  "_comment": "AWI ENGINE - TUTORIAL COMPLETO - Demonstra todos os recursos da engine em um único arquivo",
+  
+  "metadata": {
+    "title": "AwiOS Tutorial",
+    "description": "Tutorial completo: mensagens, escolhas, efeitos, mídia, condições e stats",
+    "version": "2.0",
+    "author": "AwiOS Team"
+  },
+  
+  "characters": {
+    "player": {
+      "name": "You",
+      "color": "#2196F3"
+    },
+    "guide": {
+      "name": "Engine Guide",
+      "color": "#4CAF50"
+    },
+    "alex": {
+      "name": "Alex",
+      "color": "#FF9800",
+      "avatar": "images/bg3.jpg"
+    },
+    "sarah": {
+      "name": "Sarah",
+      "color": "#E91E63",
+      "avatar": "images/bg1.jpg"
+    }
+  },
+  
+  "nodes": {
+    "_comment_welcome": "=== SEÇÃO 1: INTRODUÇÃO E CONTROLES ===",
+    "start": {
+      "type": "message",
+      "character": "guide",
+      "text": "🚀 Welcome to the complete AwiOS tutorial!",
+      "next": "intro_controls"
+    },
+    
+    "intro_controls": {
+      "type": "message",
+      "character": "guide",
+      "text": "🎮 CONTROLS:\n• Click/ENTER/SPACE: Advance\n• Right-click/R/BACKSPACE: Go back\n• S key: Skip Mode\n• T key: Toggle text speed\n• Keys 1,2,3: Quick choice selection",
+      "next": "intro_advance"
+    },
+    
+    "intro_advance": {
+      "type": "message",
+      "character": "guide",
+      "text": "Try clicking or pressing ENTER to advance through messages...",
+      "next": "section_1_choices"
+    },
+
+    "_comment_choices": "=== SEÇÃO 2: SISTEMA DE ESCOLHAS E EFEITOS ===",
+    "section_1_choices": {
+      "type": "message",
+      "character": "guide",
+      "text": "📋 SECTION 1: Choices and Effects System",
+      "next": "first_choice"
+    },
+    
+    "first_choice": {
+      "type": "choice",
+      "character": "guide",
+      "text": "Let's start with a simple choice. What's your favorite color?",
+      "choices": [
+        {
+          "text": "🔵 Blue",
+          "next": "choice_blue",
+          "effects": {
+            "affection": 2,
+            "points": 10
+          }
+        },
+        {
+          "text": "🔴 Red",
+          "next": "choice_red",
+          "effects": {
+            "affection": 1,
+            "points": 10,
+            "trust": 1
+          }
+        },
+        {
+          "text": "🟢 Green",
+          "next": "choice_green",
+          "effects": {
+            "affection": 3,
+            "points": 15
+          }
+        }
+      ]
+    },
+    
+    "choice_blue": {
+      "type": "message",
+      "character": "guide",
+      "text": "Blue! A classic and reliable choice. 💙",
+      "next": "explain_stats"
+    },
+    
+    "choice_red": {
+      "type": "message",
+      "character": "guide",
+      "text": "Red! Full of energy and passion! ❤️",
+      "next": "explain_stats"
+    },
+    
+    "choice_green": {
+      "type": "message",
+      "character": "guide",
+      "text": "Green! My favorite color too! We have a lot in common! 💚",
+      "next": "explain_stats"
+    },
+    
+    "explain_stats": {
+      "type": "message",
+      "character": "guide",
+      "text": "📊 Look at the bottom bar! Your stats changed based on your choice:\n• ❤️ Affection: relationship level\n• ⭐ Points: general score\n• 🤝 Trust: trust level\n• 💀 Corruption: dark choices",
+      "next": "effects_demo"
+    },
+    
+    "effects_demo": {
+      "type": "choice",
+      "character": "guide",
+      "text": "Let's test positive and negative effects:",
+      "choices": [
+        {
+          "text": "Be kind 😊 [+5 Affection, +10 Points]",
+          "next": "kind_result",
+          "effects": {
+            "affection": 5,
+            "points": 10
+          }
+        },
+        {
+          "text": "Be indifferent 😐 [-2 Affection]",
+          "next": "neutral_result",
+          "effects": {
+            "affection": -2
+          }
+        },
+        {
+          "text": "Do something questionable 😈 [+3 Corruption, -1 Trust]",
+          "next": "dark_result",
+          "effects": {
+            "corruption": 3,
+            "trust": -1,
+            "points": 15
+          }
+        }
+      ]
+    },
+    
+    "kind_result": {
+      "type": "message",
+      "character": "guide",
+      "text": "How sweet! Kind choices increase affection and points! 💕",
+      "next": "section_2_media"
+    },
+    
+    "neutral_result": {
+      "type": "message",
+      "character": "guide",
+      "text": "Hmm... negative choices can hurt relationships. But you can go back!",
+      "next": "section_2_media"
+    },
+    
+    "dark_result": {
+      "type": "message",
+      "character": "guide",
+      "text": "Interesting... dark choices might give more points, but have consequences! ⚠️",
+      "next": "section_2_media"
+    },
+
+    "_comment_media": "=== SEÇÃO 2: SISTEMA DE MÍDIA ===",
+    "section_2_media": {
+      "type": "message",
+      "character": "guide",
+      "text": "🎬 SECTION 2: Media System",
+      "next": "show_image"
+    },
+    
+    "show_image": {
+      "type": "message",
+      "character": "guide",
+      "text": "Here's an example image you can tap to view full screen:",
+      "media": [
+        {
+          "type": "image",
+          "src": "images/test.png"
+        }
+      ],
+      "next": "show_second_image"
+    },
+    
+    "show_second_image": {
+      "type": "message",
+      "character": "guide",
+      "text": "Here's another image (tap to view full screen). Videos and GIFs work the same way!",
+      "media": [
+        {
+          "type": "image",
+          "src": "images/bg2.jpg"
+        }
+      ],
+      "next": "section_3_settings"
+    },
+
+    "_comment_settings": "=== SEÇÃO 3: CONFIGURAÇÕES ===",
+    "section_3_settings": {
+      "type": "message",
+      "character": "guide",
+      "text": "⚙️ SECTION 3: Settings Features",
+      "next": "settings_info"
+    },
+    
+    "settings_info": {
+      "type": "message",
+      "character": "guide",
+      "text": "📱 Available settings:\n• Language (English/Portuguese)\n• Text speed (affects display speed)\n• Auto-save toggle\n• Notifications control\n• Gallery management\n• Progress reset\n\nTry changing settings and see the effects!",
+      "next": "section_4_conditions"
+    },
+
+    "_comment_conditions": "=== SEÇÃO 4: SISTEMA DE CONDIÇÕES ===",
+    "section_4_conditions": {
+      "type": "message",
+      "character": "guide",
+      "text": "🔀 SECTION 4: Conditional System",
+      "next": "meet_sarah"
+    },
+    
+    "meet_sarah": {
+      "type": "message",
+      "character": "sarah",
+      "text": "Hi! I'm Sarah. I'll help demonstrate how conditions work in the engine!",
+      "next": "condition_test"
+    },
+    
+    "condition_test": {
+      "type": "choice",
+      "character": "sarah",
+      "text": "Let's test this! Make a choice that will affect the next scene:",
+      "choices": [
+        {
+          "text": "Trust Sarah completely 🤗",
+          "next": "trust_sarah",
+          "effects": {
+            "trust": 5,
+            "affection": 3
+          }
+        },
+        {
+          "text": "Be cautious with Sarah 🤔",
+          "next": "cautious_sarah",
+          "effects": {
+            "trust": -1,
+            "affection": 1
+          }
+        }
+      ]
+    },
+    
+    "trust_sarah": {
+      "type": "message",
+      "character": "sarah",
+      "text": "Thank you for trusting me! This will be important later...",
+      "next": "condition_result"
+    },
+    
+    "cautious_sarah": {
+      "type": "message",
+      "character": "sarah", 
+      "text": "I understand your caution. Trust must be earned...",
+      "next": "condition_result"
+    },
+    
+    "condition_result": {
+      "type": "condition",
+      "condition": "trust >= 3",
+      "if_true": "trusted_path",
+      "if_false": "untrusted_path"
+    },
+    
+    "trusted_path": {
+      "type": "message",
+      "character": "sarah",
+      "text": "Since you trust me, I can share a secret: conditions can create completely different story branches! 🔓",
+      "next": "explain_conditions"
+    },
+    
+    "untrusted_path": {
+      "type": "message",
+      "character": "sarah",
+      "text": "I wish I could tell you more, but trust is important for deeper conversations... 🔒",
+      "next": "explain_conditions"
+    },
+    
+    "explain_conditions": {
+      "type": "message",
+      "character": "guide",
+      "text": "💡 Did you see? Based on your trust level, Sarah reacted differently! Conditions can check any stat: affection >= 10, points < 50, corruption > 0, etc.",
+      "next": "section_5_advanced"
+    },
+
+    "_comment_advanced": "=== SEÇÃO 5: FINALIZAÇÃO ===",
+    "section_5_advanced": {
+      "type": "message",
+      "character": "guide",
+      "text": "🎯 FINAL SECTION: Test Your Knowledge",
+      "next": "advanced_choice"
+    },
+    
+    "advanced_choice": {
+      "type": "choice",
+      "character": "guide",
+      "text": "Let's test a complex scenario with multiple effects and conditions:",
+      "choices": [
+        {
+          "text": "Take the heroic path 🦸‍♀️ [High risk, high reward]",
+          "next": "heroic_path",
+          "effects": {
+            "points": 20,
+            "trust": 3,
+            "affection": 2
+          }
+        },
+        {
+          "text": "Choose the safe path 🛡️ [Low risk, moderate reward]",
+          "next": "safe_path",
+          "effects": {
+            "points": 10,
+            "trust": 1
+          }
+        },
+        {
+          "text": "Take the dark path 😈 [Corruption, but powerful]",
+          "next": "dark_path",
+          "effects": {
+            "corruption": 5,
+            "points": 25,
+            "trust": -2,
+            "affection": -1
+          }
+        }
+      ]
+    },
+    
+    "heroic_path": {
+      "type": "message",
+      "character": "guide",
+      "text": "Brave choice! Heroes often face the greatest challenges but reap the greatest rewards! ⭐",
+      "next": "final_condition"
+    },
+    
+    "safe_path": {
+      "type": "message",
+      "character": "guide", 
+      "text": "Wisdom is knowing when to be cautious. Sometimes the safe path is the right path! 🛡️",
+      "next": "final_condition"
+    },
+    
+    "dark_path": {
+      "type": "message",
+      "character": "guide",
+      "text": "Power comes with a price. The dark path offers strength, but at what cost? ⚠️",
+      "next": "final_condition"
+    },
+    
+    "final_condition": {
+      "type": "condition",
+      "condition": "points >= 30",
+      "if_true": "high_score_ending",
+      "if_false": "normal_ending"
+    },
+    
+    "high_score_ending": {
+      "type": "message",
+      "character": "guide",
+      "text": "🏆 EXCELLENT! You scored 30+ points! You've mastered the AwiOS tutorial!",
+      "next": "tutorial_complete"
+    },
+    
+    "normal_ending": {
+      "type": "message",
+      "character": "guide",
+      "text": "Good job completing the tutorial! There's always room to explore different paths and choices.",
+      "next": "tutorial_complete"
+    },
+    
+    "tutorial_complete": {
+      "type": "message",
+      "character": "guide",
+      "text": "🎯 Tutorial Complete!\n\n✅ You learned:\n• Message system with text speed control\n• Choices & stat effects (❤️ Affection, ⭐ Points, 🤝 Trust, 💀 Corruption)\n• Images, videos & GIFs with full-screen viewing\n• Settings system (Language, Speed, Notifications)\n• Conditional story branching\n\nNow you're ready to explore AwiOS!",
+      "next": "final_tips"
+    },
+    
+    "final_tips": {
+      "type": "message",
+      "character": "guide",
+      "text": "💡 Pro Tips:\n• Check Settings to customize your experience\n• Images and videos unlock automatically in Gallery\n• Tap media to view full screen\n• Stats influence story paths\n• Try different choices to see all outcomes!",
+      "next": null
+    }
+  }
+}
