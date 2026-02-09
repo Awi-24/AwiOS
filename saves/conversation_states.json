@@ -1,0 +1,178 @@
+{
+  "complete_tutorial": {
+    "dialogue_id": "complete_tutorial",
+    "current_node_id": null,
+    "player_stats": {
+      "trust": 24,
+      "affection": 42,
+      "corruption": 6,
+      "points": 145
+    },
+    "displayed_messages": [
+      {
+        "node_id": "start",
+        "sender_id": "guide",
+        "content": "🚀 Welcome to the complete AwiOS tutorial!",
+        "text": "🚀 Welcome to the complete AwiOS tutorial!",
+        "media": {}
+      },
+      {
+        "node_id": "intro_controls",
+        "sender_id": "guide",
+        "content": "🎮 CONTROLS:\n• Click/ENTER/SPACE: Advance\n• Right-click/R/BACKSPACE: Go back\n• S key: Skip Mode\n• T key: Toggle text speed\n• Keys 1,2,3: Quick choice selection",
+        "text": "🎮 CONTROLS:\n• Click/ENTER/SPACE: Advance\n• Right-click/R/BACKSPACE: Go back\n• S key: Skip Mode\n• T key: Toggle text speed\n• Keys 1,2,3: Quick choice selection",
+        "media": {}
+      },
+      {
+        "node_id": "intro_advance",
+        "sender_id": "guide",
+        "content": "Try clicking or pressing ENTER to advance through messages...",
+        "text": "Try clicking or pressing ENTER to advance through messages...",
+        "media": {}
+      },
+      {
+        "node_id": "section_1_choices",
+        "sender_id": "guide",
+        "content": "📋 SECTION 1: Choices and Effects System",
+        "text": "📋 SECTION 1: Choices and Effects System",
+        "media": {}
+      },
+      {
+        "node_id": "first_choice",
+        "sender_id": "guide",
+        "content": "Let's start with a simple choice. What's your favorite color?",
+        "text": "Let's start with a simple choice. What's your favorite color?",
+        "media": {}
+      },
+      {
+        "node_id": "player_choice_1770678986145",
+        "sender_id": "player",
+        "content": "🔵 Blue",
+        "text": null,
+        "media": {}
+      },
+      {
+        "node_id": "choice_blue",
+        "sender_id": "guide",
+        "content": "Blue! A classic and reliable choice. 💙",
+        "text": "Blue! A classic and reliable choice. 💙",
+        "media": {}
+      },
+      {
+        "node_id": "explain_stats",
+        "sender_id": "guide",
+        "content": "📊 Look at the bottom bar! Your stats changed based on your choice:\n• ❤️ Affection: relationship level\n• ⭐ Points: general score\n• 🤝 Trust: trust level\n• 💀 Corruption: dark choices",
+        "text": "📊 Look at the bottom bar! Your stats changed based on your choice:\n• ❤️ Affection: relationship level\n• ⭐ Points: general score\n• 🤝 Trust: trust level\n• 💀 Corruption: dark choices",
+        "media": {}
+      },
+      {
+        "node_id": "effects_demo",
+        "sender_id": "guide",
+        "content": "Let's test positive and negative effects:",
+        "text": "Let's test positive and negative effects:",
+        "media": {}
+      },
+      {
+        "node_id": "player_choice_1770678988525",
+        "sender_id": "player",
+        "content": "Be kind 😊 [+5 Affection, +10 Points]",
+        "text": null,
+        "media": {}
+      },
+      {
+        "node_id": "kind_result",
+        "sender_id": "guide",
+        "content": "How sweet! Kind choices increase affection and points! 💕",
+        "text": "How sweet! Kind choices increase affection and points! 💕",
+        "media": {}
+      },
+      {
+        "node_id": "section_2_media",
+        "sender_id": "guide",
+        "content": "🎬 SECTION 2: Media System",
+        "text": "🎬 SECTION 2: Media System",
+        "media": {}
+      },
+      {
+        "node_id": "show_image",
+        "sender_id": "guide",
+        "content": "Here's an example image you can tap to view full screen:",
+        "text": "Here's an example image you can tap to view full screen:",
+        "media": [
+          {
+            "type": "image",
+            "src": "images/test.png"
+          }
+        ]
+      },
+      {
+        "node_id": "show_second_image",
+        "sender_id": "guide",
+        "content": "Here's another image (tap to view full screen). Videos and GIFs work the same way!",
+        "text": "Here's another image (tap to view full screen). Videos and GIFs work the same way!",
+        "media": [
+          {
+            "type": "image",
+            "src": "images/bg2.jpg"
+          }
+        ]
+      },
+      {
+        "node_id": "section_3_settings",
+        "sender_id": "guide",
+        "content": "⚙️ SECTION 3: Settings Features",
+        "text": "⚙️ SECTION 3: Settings Features",
+        "media": {}
+      },
+      {
+        "node_id": "settings_info",
+        "sender_id": "guide",
+        "content": "📱 Available settings:\n• Language (English/Portuguese)\n• Text speed (affects display speed)\n• Auto-save toggle\n• Notifications control\n• Gallery management\n• Progress reset\n\nTry changing settings and see the effects!",
+        "text": "📱 Available settings:\n• Language (English/Portuguese)\n• Text speed (affects display speed)\n• Auto-save toggle\n• Notifications control\n• Gallery management\n• Progress reset\n\nTry changing settings and see the effects!",
+        "media": {}
+      },
+      {
+        "node_id": "section_4_conditions",
+        "sender_id": "guide",
+        "content": "🔀 SECTION 4: Conditional System",
+        "text": "🔀 SECTION 4: Conditional System",
+        "media": {}
+      },
+      {
+        "node_id": "meet_sarah",
+        "sender_id": "sarah",
+        "content": "Hi! I'm Sarah. I'll help demonstrate how conditions work in the engine!",
+        "text": "Hi! I'm Sarah. I'll help demonstrate how conditions work in the engine!",
+        "media": {}
+      },
+      {
+        "node_id": "condition_test",
+        "sender_id": "sarah",
+        "content": "Let's test this! Make a choice that will affect the next scene:",
+        "text": "Let's test this! Make a choice that will affect the next scene:",
+        "media": {}
+      },
+      {
+        "node_id": "player_choice_1770678995218",
+        "sender_id": "player",
+        "content": "Trust Sarah completely 🤗",
+        "text": null,
+        "media": {}
+      },
+      {
+        "node_id": "trust_sarah",
+        "sender_id": "sarah",
+        "content": "Thank you for trusting me! This will be important later...",
+        "text": "Thank you for trusting me! This will be important later...",
+        "media": {}
+      },
+      {
+        "node_id": "condition_result",
+        "sender_id": "unknown",
+        "content": "",
+        "text": null,
+        "media": {}
+      }
+    ]
+  }
+}

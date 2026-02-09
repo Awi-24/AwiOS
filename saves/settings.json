@@ -1,0 +1,10 @@
+{
+  "language": "en_US",
+  "text_speed": 2.0,
+  "auto_read": false,
+  "skip_read": true,
+  "volume_music": 0.7,
+  "volume_sfx": 0.8,
+  "volume_voice": 1.0,
+  "auto_save": false
+}

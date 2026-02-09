@@ -1,0 +1,19 @@
+{
+  "chats": {
+    "complete_tutorial": {
+      "id": "complete_tutorial",
+      "name": "AwiOS Tutorial",
+      "avatar": "assets/images/test.png",
+      "dialogue_file": "assets/dialogues/complete_tutorial.json",
+      "last_message": "Welcome to the complete AwiOS tutorial!",
+      "last_message_time": 1770676600.8138623,
+      "unread_count": 0,
+      "status": "online"
+    }
+  },
+  "unread_messages": {
+    "complete_tutorial": 0
+  },
+  "active_chat_id": "complete_tutorial",
+  "last_updated": 1770679938.7095153
+}
