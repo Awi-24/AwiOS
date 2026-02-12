@@ -1,0 +1,90 @@
+# ============================================================
+# main.awi – AwiOS Engine Interactive Guide
+# An assistant explains how the .awi engine works.
+# ============================================================
+
+SETTINGS
+  id: main_01
+  title: Interactive Guide
+  story_name: AwiOS Engine
+  story_id: main
+  avatar: assets/images/tulip.png
+  preview: Hello! I'm your guide to the AwiOS Engine. Tap to start.
+
+THREADS
+  grupo: Guide | start | A,P
+
+CHARACTERS
+  A: Assistant (#9C27B0) [assets/images/tulip.png]
+  [Player] P: You (#2196F3) [assets/images/sunset_sky.png]
+
+[start]
+  type: chat
+  A: Hello! Welcome to the AwiOS Engine — a lightweight narrative engine for phone simulators.
+  P: Hi! How does it work?
+  A: Everything is controlled by .awi scripts. Linear dialogue, choices, notifications, and more.
+  next: linear_demo
+
+[linear_demo]
+  type: chat
+  A: See: this is linear dialogue. Each message follows the previous until we reach a choice.
+  P: Got it.
+  A: We can also add images and videos directly in the chat bubble.
+  image: assets/images/mountain_snow.png
+  A: Like this mountain landscape. Tap to zoom!
+  next: choice_demo
+
+[choice_demo]
+  type: choice
+  A: Now a choice. What do you want to explore first?
+  > See notifications -> path_notify {RECORD_PATH: path_notify}
+  > Unlock gallery -> path_gallery {RECORD_PATH: path_gallery}
+  > See everything -> path_full {RECORD_PATH: path_full}
+
+[path_notify]
+  type: chat
+  A: Great! I'll trigger system notifications.
+  system: trigger(app="instahub", action="post", id="p_tulip")
+  system: toast(title="InstaHub", body="New photo in feed!")
+  system: notify(title="AwiOS", body="Post unlocked in InstaHub.", app="messages")
+  A: Open InstaHub (icon on the bar) to see the tulip post. The toast appeared at the top!
+  next: gallery_demo
+
+[path_gallery]
+  type: chat
+  A: I'll unlock some photos in the gallery.
+  system: unlock(app="gallery", id="assets/images/sunset_sky.png")
+  unlock_gallery: assets/images/mountain_snow.png
+  system: notify(title="Gallery", body="New photos unlocked!", app="messages")
+  A: Open the Gallery to see the images. Two photos were unlocked.
+  next: final_msg
+
+[path_full]
+  type: chat
+  A: Perfect! I'll demonstrate everything at once.
+  system: trigger(app="instahub", action="post", id="p_tulip")
+  system: trigger(app="instahub", action="post", id="p_sunset")
+  system: unlock(app="gallery", id="assets/images/sunset_sky.png")
+  unlock_gallery: assets/images/mountain_snow.png
+  system: toast(title="AwiOS", body="InstaHub and Gallery updated!")
+  A: InstaHub received two posts; the Gallery has two new photos. Explore the apps!
+  next: final_msg
+
+[gallery_demo]
+  type: chat
+  A: And the gallery? Each script can unlock photos with system: unlock or unlock_gallery.
+  system: unlock(app="gallery", id="assets/images/tulip.png")
+  system: notify(title="Gallery", body="New photo: tulip!", app="messages")
+  A: The tulip was added to your gallery. Open the Gallery app to see it.
+  next: final_msg
+
+[final_msg]
+  type: chat
+  A: That was the interactive guide! You saw: linear dialogue, choices, and system commands (trigger, toast, notify, unlock).
+  P: Cool! How do I create my own scripts?
+  A: Use template.awi as a reference. All commands are documented there. Good luck!
+  next: fim
+
+[fim]
+  type: chat
+  A: Thanks for trying the AwiOS Engine. Press Run and create your stories!

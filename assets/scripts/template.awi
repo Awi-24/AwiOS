@@ -1,0 +1,156 @@
+# ============================================================
+# TEMPLATE .awi – Reference for all language keywords
+# Use this file as a base to create your stories
+# ============================================================
+
+# --- SETTINGS: chapter and story metadata ---
+SETTINGS
+  id: template_01
+  title: Chapter Title
+  story_name: Story Name
+  story_id: template
+  avatar: assets/images/tulip.png
+  preview: Preview text for the chat list.
+  # next_chapter: template_02  # ID of next chapter (file template_02.awi)
+
+  # Condition to load this chapter (global vars/history)
+  # dependency: global.trust >= 0
+
+  # Required flag: !flag = must not exist, flag = must exist
+  # required_flag: !played_tutorial
+
+  # Entry point: choose initial label based on conditions (RECORD_PATH/history)
+  # entry_point:
+  #   - if: history.template_01 == "path_a" && global.trust > 2 -> path_a
+  #   - if: history.template_01 == "path_b" -> path_b
+  #   - else: start
+
+# --- THREADS: parallel conversations (groups or 1-on-1) ---
+# Format: id: name | initial_label | participant(s)
+# Group: Y,P = character IDs. 1-on-1: S = unique characterId.
+THREADS
+  grupo: Main Group | start | Y,P
+  amigo: Friend | amigo_conversa | S
+
+# --- CHARACTERS: chat characters ---
+# Format: ID: Name (#color) [avatar_path]
+# [Player] = player-controlled character
+CHARACTERS
+  Y: Awi (#9C27B0) [assets/images/tulip.png]
+  [Player] P: You (#2196F3) [assets/images/sunset_sky.png]
+  S: Sammy (#9C27B0) [assets/images/tulip.png]
+
+# --- NODES: blocks [label] ---
+# Labels are referenced in next, next_chapter, return_to, trigger, etc.
+
+# --- type: chat – linear dialogue ---
+[start]
+  type: chat
+  Y: Message from character Y.
+  P: Player response (P).
+  Y: Delay between messages:
+  delay: 2.0
+  Y: ...this message appears after 2 seconds.
+  next: escolha_demo
+
+# --- type: choice – player choices ---
+# Format: > text -> label { effects }
+# Effects: variable += N, variable = N, RECORD_PATH: label, UNLOCK_MEDIA: path
+[escolha_demo]
+  type: choice
+  Y: Choose an option:
+  > Option A -> path_a {trust += 3, points = 10, RECORD_PATH: path_a}
+  > Option B -> path_b {trust -= 1, RECORD_PATH: path_b}
+  > Option with media -> path_unlock {UNLOCK_MEDIA: assets/images/mountain_snow.png, RECORD_PATH: path_unlock}
+
+# --- image and video in bubble ---
+[path_a]
+  type: chat
+  Y: Image in bubble:
+  image: assets/images/mountain_snow.png
+  Y: Video in chat is also supported:
+  video: assets/videos/awiOS.mp4
+  next: system_demo
+
+[path_b]
+  type: chat
+  Y: Path B.
+  next: system_demo
+
+[path_unlock]
+  type: chat
+  Y: Media unlocked in gallery via choice effect!
+  next: system_demo
+
+# --- system: – simulated OS commands ---
+# trigger: unlock post in InstaHub
+# notify: notification in notification center
+# toast: slide-in from top (immediate feedback)
+# unlock: unlock media in gallery
+# set_flag: set global flag (key, value)
+[system_demo]
+  type: chat
+  Y: System commands simulate OS events:
+  system: trigger(app="instahub", action="post", id="p01")
+  system: notify(title="InstaHub", body="New post!", app="messages")
+  system: toast(title="Awi", body="You received a message.")
+  system: unlock(app="gallery", id="assets/images/mountain_snow.png")
+  system: set_flag(key="saw_demo", value=true)
+  Y: Done! Post, notification, toast and gallery unlocked.
+  next: unlock_gallery_demo
+
+# --- unlock_gallery: unlock media directly in block ---
+[unlock_gallery_demo]
+  type: chat
+  Y: You can also unlock via key:
+  unlock_gallery: assets/images/tulip.png
+  Y: Image added to gallery!
+  next: trigger_demo
+
+# --- trigger: unlocks new conversation in list ---
+[trigger_demo]
+  type: chat
+  Y: Sammy wants to talk to you. Go back to the list and open "Friend".
+  trigger: amigo
+  next: fim_cap1
+
+# --- Secondary thread (1-on-1 conversation) ---
+# return_to: thread_id | label = on exit, return to thread and go to label
+[amigo_conversa]
+  type: chat
+  S: Hi! You opened my conversation.
+  P: Hi! What did you want?
+  S: I just wanted to tell you something important...
+  image: assets/images/sunset_sky.png
+  system: unlock(app="gallery", id="assets/images/sunset_sky.png")
+  system: notify(title="Gallery", body="New photo!", app="messages")
+  S: Go back to the main group to continue.
+  return_to: grupo | fim_cap1
+  next: voltar
+
+[voltar]
+  # Empty block; return_to is on previous node
+
+# --- condition: conditional branching ---
+# Operators: && (AND), || (OR), ! (NOT), ==, !=, >=, <=, <, >
+# If condition true: show content and go to next. If false: go to branch_else.
+[check_and]
+  condition: trust >= 2 && points > 5
+  Y: Your trust is high and points sufficient!
+  next: fim_cap1
+
+[check_or]
+  condition: trust < 0 || points < 3
+  Y: Lacking trust or points.
+  next: fim_cap1
+
+[check_not]
+  condition: !saw_demo
+  Y: You haven't seen the demo yet.
+  next: fim_cap1
+
+# --- End of chapter ---
+[fim_cap1]
+  type: chat
+  Y: End of chapter! Uncomment next_chapter in SETTINGS to link to the next one.
+  # next_chapter: template_02
