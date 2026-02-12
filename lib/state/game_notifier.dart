@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/character.dart';
 import '../models/chat_entry.dart';
@@ -14,9 +15,11 @@ import '../engine/engine.dart';
 import '../services/sound_service.dart';
 import 'chat_progress_notifier.dart';
 import 'chats_provider.dart';
+import 'instahub_notifier.dart';
 import 'settings_notifier.dart';
 import 'unlocked_gallery_notifier.dart';
 import 'unlocked_threads_notifier.dart';
+import 'wallpaper_notifier.dart';
 
 /// Sound service singleton (disposed when app closes).
 final soundServiceProvider = Provider<SoundService>((ref) {
@@ -444,10 +447,25 @@ class GameNotifier extends Notifier<GameStateUI> {
     state = state.copyWith(messages: [], choices: null);
   }
 
-  /// Limpa todo o cache e dados persistentes (saves, progresso, galeria, threads).
+  /// Limpa todo o cache e dados persistentes (saves, progresso, galeria, threads, wallpapers, instahub, settings).
   Future<void> clearAllData() async {
     await resetChatHistory();
     await ref.read(unlockedGalleryProvider.notifier).clearAll();
+    await ref.read(wallpaperProvider.notifier).clearAll();
+    await ref.read(instahubProvider.notifier).clearAll();
+    await ref.read(settingsProvider.notifier).clearAll();
+    await _clearAllSharedPreferences();
+  }
+
+  /// Remove todos os keys awios_* do SharedPreferences (garante limpeza total).
+  Future<void> _clearAllSharedPreferences() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final keys = prefs.getKeys().where((k) => k.startsWith('awios_')).toList();
+      for (final k in keys) {
+        await prefs.remove(k);
+      }
+    } catch (_) {}
   }
 }
 

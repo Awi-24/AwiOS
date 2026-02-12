@@ -166,6 +166,15 @@ class InstaHubNotifier extends Notifier<InstaHubState> {
   void reset() {
     state = const InstaHubState();
   }
+
+  /// Limpa posts, likes, comentários e persiste.
+  Future<void> clearAll() async {
+    state = const InstaHubState();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_key);
+    } catch (_) {}
+  }
 }
 
 final instahubProvider = NotifierProvider<InstaHubNotifier, InstaHubState>(InstaHubNotifier.new);

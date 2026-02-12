@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 
 /// Restores plain assets from build/assets_backup after a release build.

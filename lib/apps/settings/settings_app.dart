@@ -202,14 +202,14 @@ class SettingsApp extends AwiApp {
               ListTile(
                 leading: const Icon(Icons.cleaning_services, color: AppTheme.settingsAccent),
                 title: const Text('Clear all data', style: TextStyle(color: AppTheme.labelPrimary)),
-                subtitle: const Text('Reset chat history + unlocked gallery images + cache'),
+                subtitle: const Text('Reset chat history, gallery, wallpapers, InstaHub, settings'),
                 onTap: () async {
                   final confirmed = await showDialog<bool>(
                     context: context,
                     builder: (ctx) => AlertDialog(
                       title: const Text('Clear all data?'),
                       content: const Text(
-                        'This will clear all progress, saves, chat previews, unlocked gallery images and cached data. This cannot be undone.',
+                        'This will clear all progress, saves, chat previews, unlocked gallery, wallpapers, InstaHub posts, and settings. This cannot be undone.',
                       ),
                       actions: [
                         TextButton(

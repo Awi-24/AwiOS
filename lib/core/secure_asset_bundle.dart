@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +8,9 @@ import 'asset_key.dart';
 /// In debug mode, delegates to rootBundle (no encryption).
 class SecureAssetBundle extends CachingAssetBundle {
   SecureAssetBundle({AssetBundle? parent}) : _parent = parent ?? rootBundle;
+
+  /// Singleton para uso em todo o app (sons, scripts, etc.).
+  static final instance = SecureAssetBundle();
 
   final AssetBundle _parent;
 

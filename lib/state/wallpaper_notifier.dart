@@ -68,6 +68,15 @@ class WallpaperNotifier extends Notifier<WallpaperState> {
     state = state.copyWith(chatWallpaper: path, clearChat: path == null);
     _save();
   }
+
+  /// Remove wallpapers e persiste.
+  Future<void> clearAll() async {
+    state = const WallpaperState();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_key);
+    } catch (_) {}
+  }
 }
 
 final wallpaperProvider = NotifierProvider<WallpaperNotifier, WallpaperState>(WallpaperNotifier.new);

@@ -430,6 +430,24 @@ Save data includes: chat progress, choices, gallery unlocks, InstaHub posts, set
 
 ## Building for Distribution
 
+### App icon (Windows title bar, web favicon)
+
+To update the app icon (letter "A" on dark background):
+
+1. **Generate icons** from `icon/app_icon.png`:
+   ```bash
+   dart run flutter_launcher_icons
+   ```
+   Or double-click `tool/update_icon.bat`.
+
+2. **Clean rebuild** (Windows caches icons):
+   ```bash
+   flutter clean
+   flutter build windows
+   ```
+
+Source: `icon/app_icon.png` (1024×1024). Favicon: `web/favicon.svg`.
+
 ### Windows
 
 ```bash

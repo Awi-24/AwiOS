@@ -14,9 +14,7 @@ import 'ui/components/system_notification_overlay.dart';
 import 'ui/phone_shell/phone_boot_screen.dart';
 import 'ui/theme/app_theme.dart';
 
-/// Asset bundle that decrypts encrypted assets in release mode.
-/// In debug mode, delegates to rootBundle (no encryption).
-final secureAssetBundle = SecureAssetBundle();
+final secureAssetBundle = SecureAssetBundle.instance;
 
 /// Transição suave de páginas: slide + fade.
 class _SlideWithFadeTransitionBuilder extends PageTransitionsBuilder {

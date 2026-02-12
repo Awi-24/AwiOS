@@ -3,9 +3,9 @@
     "short_name": "awios",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#0D0C1D",
+    "theme_color": "#098DF1",
+    "description": "AwiOS - Visual Novel Engine",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

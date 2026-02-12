@@ -117,6 +117,7 @@ class _ChatListScreen extends ConsumerWidget {
       final chapterId = saveData?.currentChapterId ?? chat.chapterId ?? chat.id;
       final scriptPath = chat.scriptPathForChapter(chapterId);
 
+      if (!context.mounted) return;
       final script = await DefaultAssetBundle.of(context).loadString(scriptPath);
       if (!context.mounted) return;
 
@@ -315,6 +316,7 @@ class _ConversationPageState extends ConsumerState<_ConversationPage> {
       final chapterId = saveData?.currentChapterId ?? chat.chapterId ?? chat.id;
       final scriptPath = chat.scriptPathForChapter(chapterId);
 
+      if (!context.mounted) return;
       final script = await DefaultAssetBundle.of(context).loadString(scriptPath);
       if (!context.mounted) return;
 

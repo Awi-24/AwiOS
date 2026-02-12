@@ -1,12 +1,17 @@
+import 'dart:typed_data';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 
+import '../core/secure_asset_bundle.dart';
+
 /// Sons do chat: envio, recebimento, notificação.
-/// Usa assets quando disponíveis; fallback para beeps gerados.
+/// Usa [secureAssetBundle] para suportar assets encriptados em release.
+/// Fallback para beeps gerados quando o asset falha.
 class SoundService {
-  static const _sendPath = 'sounds/send_message.mp3';
-  static const _receivePath = 'sounds/received_message.mp3';
-  static const _notificationPath = 'sounds/toast_sound.mp3';
+  static const _sendPath = 'assets/sounds/send_message.mp3';
+  static const _receivePath = 'assets/sounds/received_message.mp3';
+  static const _notificationPath = 'assets/sounds/toast_sound.mp3';
 
   final AudioPlayer _player = AudioPlayer();
   bool _useAssets = true;
@@ -37,7 +42,9 @@ class SoundService {
   Future<void> _play(String assetPath, Uint8List fallbackBytes) async {
     try {
       if (_useAssets) {
-        await _player.play(AssetSource(assetPath));
+        final data = await SecureAssetBundle.instance.load(assetPath);
+        final bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+        await _player.play(BytesSource(bytes));
       } else {
         throw Exception('no asset');
       }

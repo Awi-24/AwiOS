@@ -118,6 +118,15 @@ class SettingsNotifier extends Notifier<SettingsState> {
     state = state.copyWith(soundEnabled: value);
     _save();
   }
+
+  /// Restaura configurações padrão e remove da persistência.
+  Future<void> clearAll() async {
+    state = const SettingsState();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_key);
+    } catch (_) {}
+  }
 }
 
 final settingsProvider = NotifierProvider<SettingsNotifier, SettingsState>(SettingsNotifier.new);
