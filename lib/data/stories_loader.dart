@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import '../engine/path/awi_chapter_header.dart';
 import '../engine/parser/awi_parser.dart';
 import '../models/chat_entry.dart';
+import '../models/character.dart';
 
 /// Naming convention: {story_id}_{chapter:02d}.awi or legacy {story_id}_capN.awi
 ({String storyId, int chapter}) _parseFilename(String path) {
@@ -35,18 +36,19 @@ Future<List<ChatEntry>?> loadStoriesFromManifest({AssetBundle? bundle}) async {
     if (scripts.isEmpty) return null;
 
     final parser = AwiParser();
-    final byStory = <String, List<({String path, int chapter, AwiChapterHeader header})>>{};
+    final byStory = <String, List<({String path, int chapter, AwiChapterHeader header, Map<String, Character> characters})>>{};
 
     for (final path in scripts) {
       final parsed = _parseFilename(path);
       final content = await b.loadString(path);
-      final header = parser.parseHeaderOnly(content);
+      final (header, characters) = parser.parseHeaderAndCharacters(content);
       if (header == null || header.id == null) continue;
 
       byStory.putIfAbsent(parsed.storyId, () => []).add((
         path: path,
         chapter: parsed.chapter,
         header: header,
+        characters: characters,
       ));
     }
 
@@ -62,10 +64,11 @@ Future<List<ChatEntry>?> loadStoriesFromManifest({AssetBundle? bundle}) async {
 
       final first = chapters.first;
       final header = first.header;
+      final characters = first.characters;
       final meta = header.storyMeta;
 
       final storyName = meta?.storyName ?? _idToDisplayName(storyId);
-      final avatar = meta?.avatar;
+      final storyAvatar = meta?.avatar;
       final preview = meta?.preview;
 
       final firstPath = first.path;
@@ -80,8 +83,23 @@ Future<List<ChatEntry>?> loadStoriesFromManifest({AssetBundle? bundle}) async {
         }
       }
 
+      String? threadAvatar(String? characterId, List<String>? participantIds) {
+        if (characterId != null) {
+          final c = characters[characterId];
+          if (c?.avatar != null) return c!.avatar;
+        }
+        if (participantIds != null && participantIds.isNotEmpty) {
+          for (final pid in participantIds) {
+            final c = characters[pid];
+            if (c != null && !c.isPlayer && c.avatar != null) return c.avatar;
+          }
+        }
+        return storyAvatar;
+      }
+
       final threads = allThreads.entries.map((e) {
         final t = e.value;
+        final avatar = threadAvatar(t.$3, t.$4);
         if (t.$4 != null && t.$4!.isNotEmpty) {
           return ChatThreadDef(
             id: e.key,
@@ -103,12 +121,13 @@ Future<List<ChatEntry>?> loadStoriesFromManifest({AssetBundle? bundle}) async {
       }).toList();
 
       final mainThread = threads.isNotEmpty ? threads.first : null;
+      final mainAvatar = mainThread?.avatarPath ?? storyAvatar;
 
       entries.add(ChatEntry(
         id: storyId,
         name: mainThread?.name ?? storyName,
         scriptPath: firstPath,
-        avatarPath: avatar,
+        avatarPath: mainAvatar,
         lastPreview: preview,
         chapterId: storyId,
         chapterScripts: chapterScripts,

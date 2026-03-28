@@ -8,22 +8,29 @@ List<ChatEntry>? gLoadedStories;
 /// Run: dart run tool/generate_stories_manifest.dart
 const List<ChatEntry> kStoriesManifestFallback = [
   ChatEntry(
-    id: 'main',
-    name: 'Interactive Guide',
-    scriptPath: 'assets/scripts/main.awi',
-    avatarPath: 'assets/images/tulip.png',
-    lastPreview: 'Hello! I\'m your guide to the AwiOS Engine. Tap to start.',
-    chapterId: 'main',
+    id: 'ntr_story',
+    name: 'Noite de Festa',
+    scriptPath: 'assets/scripts/ntr_story_01.awi',
+    avatarPath: 'assets/images/avatar/mark_avatar.png',
+    lastPreview: "Coming home after the party. Mark is still up.",
+    chapterId: 'ntr_story',
     chapterScripts: {
-      'main': 'assets/scripts/main.awi',
+      'ntr_story_01': 'assets/scripts/ntr_story_01.awi',
     },
     threads: [
       ChatThreadDef(
-        id: 'grupo',
-        name: 'Guide',
+        id: 'mark',
+        name: 'Mark 💙',
         entryLabel: 'start',
-        participantIds: ['A', 'P'],
-        avatarPath: 'assets/images/tulip.png',
+        participantIds: ['P', 'M'],
+        avatarPath: 'assets/images/avatar/mark_avatar.png',
+      ),
+      ChatThreadDef(
+        id: 'liam',
+        name: 'Liam',
+        entryLabel: 'liam_locked',
+        characterId: 'L',
+        avatarPath: 'assets/images/avatar/liam_avatar.png',
       ),
     ],
   ),

@@ -63,4 +63,10 @@ const Map<String, InstaHubPostDef> kInstaHubPosts = {
     content: 'Video demo in feed 📹',
     videoPath: 'assets/videos/awiOS.mp4',
   ),
+  'festa01': InstaHubPostDef(
+    id: 'festa01',
+    author: 'Liam',
+    content: 'Pics from last night\'s party! 🍻',
+    imagePath: 'assets/images/avatar/festa_bar.png',
+  ),
 };

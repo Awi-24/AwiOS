@@ -8,8 +8,16 @@ import '../../models/character.dart';
 class AwiParser {
   /// Lightweight parse: only extracts SETTINGS + THREADS. Use for story metadata discovery.
   AwiChapterHeader? parseHeaderOnly(String script) {
+    final result = parseHeaderAndCharacters(script);
+    return result.$1;
+  }
+
+  /// Parses SETTINGS, THREADS, and CHARACTERS for story/thread metadata and avatars.
+  /// Returns (header, characters). Use for chat list avatar resolution.
+  (AwiChapterHeader?, Map<String, Character>) parseHeaderAndCharacters(String script) {
     final blocks = _splitBlocks(script);
     AwiChapterHeader? header;
+    final characters = <String, Character>{};
 
     for (final block in blocks) {
       if (block.name == 'SETTINGS') {
@@ -20,8 +28,29 @@ class AwiParser {
         header = header.copyWithThreads(AwiChapterHeader.parseThreadsFromLines(block.lines));
         continue;
       }
+      if (block.name == 'CHARACTERS') {
+        for (final line in block.lines) {
+          final trimmed = line.trim();
+          if (trimmed.isEmpty) continue;
+          final isPlayer = trimmed.toUpperCase().startsWith('[PLAYER]');
+          final content = isPlayer ? trimmed.substring(8).trim() : trimmed;
+          final m = RegExp(r'^([A-Za-z0-9_]+):\s*(.+?)(?:\s*\(#([A-Fa-f0-9]{6})\))?(?:\s*\[(.+)\])?$').firstMatch(content);
+          if (m != null) {
+            final bracket = m.group(4)?.trim().toLowerCase();
+            final bracketIsPlayer = bracket == 'player';
+            final avatar = (bracket != null && !bracketIsPlayer) ? m.group(4)!.trim() : null;
+            characters[m.group(1)!] = Character(
+              id: m.group(1)!,
+              name: m.group(2)!.trim(),
+              bubbleColor: m.group(3) != null ? int.parse('FF${m.group(3)}', radix: 16) : 0xFF007AFF,
+              avatar: avatar,
+              isPlayer: isPlayer || bracketIsPlayer,
+            );
+          }
+        }
+      }
     }
-    return header;
+    return (header, characters);
   }
 
   AwiParseResult parse(String script) {

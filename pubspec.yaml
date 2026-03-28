@@ -39,4 +39,5 @@ flutter:
     - assets/sounds/
     - assets/scripts/
     - assets/images/
+    - assets/images/avatar/
     - assets/videos/

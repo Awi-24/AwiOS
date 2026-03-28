@@ -35,6 +35,7 @@ class InstaHubApp extends AwiApp {
     'p_casal': _PostDef(id: 'p_casal', author: 'Yuki', avatarPath: 'assets/images/tulip.png', content: 'Our moment at the beach 💕', imagePath: 'assets/images/mountain_snow.png'),
     'p_secreto': _PostDef(id: 'p_secreto', author: '???', avatarPath: null, content: 'You need to see this...', imagePath: 'assets/images/mountain_snow.png'),
     'p_video': _PostDef(id: 'p_video', author: 'AwiOS', avatarPath: 'assets/images/tulip.png', content: 'Video demo in feed 📹', videoPath: 'assets/videos/awiOS.mp4'),
+    'festa01': _PostDef(id: 'festa01', author: 'Liam', avatarPath: 'assets/images/avatar/liam_avatar.png', content: 'Pics from last night\'s party! 🍻', imagePath: 'assets/images/avatar/festa_bar.png'),
   };
 }
 
