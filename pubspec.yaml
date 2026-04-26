@@ -1,0 +1,42 @@
+name: awios
+description: AwiOS - Visual Novel Engine. Data-driven stories inside a fictional phone OS (iOS style).
+version: 1.0.0
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  encrypt: ^5.0.3
+  flutter_riverpod: ^3.2.1
+  shared_preferences: ^2.2.2
+  audioplayers: ^6.1.0
+  video_player: ^2.9.2
+  video_player_win: ^3.2.2
+  path_provider: ^2.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  image_path: icon/app_icon.png
+  windows:
+    generate: true
+    image_path: icon/app_icon.png
+  web:
+    generate: true
+    image_path: icon/app_icon.png
+    background_color: "#0D0C1D"
+    theme_color: "#098DF1"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/sounds/
+    - assets/scripts/
+    - assets/images/
+    - assets/videos/
